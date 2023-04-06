@@ -1,0 +1,29 @@
+.card-body i{
+    color: blue;
+}
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+  
+  #header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  
+  .sidebar {
+    background-color: #f8f9fa;
+    height: calc(100vh - 56px);
+    position: relative;
+  }
+  
+  .content {
+    margin-top: 1.5rem;
+  }
+
