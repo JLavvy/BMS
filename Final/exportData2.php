@@ -1,39 +1,36 @@
 <?php
-include('config.php');
-
+require('config.php');
+require('fpdf/fpdf.php');
 
 // Fetch records from database
 $query = "SELECT * FROM loginn ORDER BY Login_id ASC";
 $result = mysqli_query($con, $query);
 
 if (mysqli_num_rows($result) > 0) {
-    $delimiter = ",";
-    $filename = "signup-data_" . date('Y-m-d') . ".csv";
+    // Create a new PDF document
+    $pdf = new FPDF();
 
-    // Create a file pointer
-    $f = fopen('php://memory', 'w');
+
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 16);
+    $pdf->Cell(0, 10, 'Total Users', 0, 1, 'C');
 
     // Set column headers
-    $fields = array('Login_id', 'Login_user_name', 'Login_Rank');
-    fputcsv($f, $fields, $delimiter);
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(70, 10, 'Login user name', 1);
+    $pdf->Cell(70, 10, 'Login Rank', 1);
+    $pdf->Ln();
 
-    // Output each row of the data, format line as csv and write to file pointer
+    // Output each row of the data
     while ($row = mysqli_fetch_assoc($result)) {
-        $lineData = array($row['Login_id'], $row['Login_user_name'], $row['Login_Rank']);
-        fputcsv($f, $lineData, $delimiter);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(70, 10, $row['Login_user_name'], 1);
+        $pdf->Cell(70, 10, $row['Login_Rank'], 1);
+        $pdf->Ln();
     }
 
-    // Move back to beginning of file
-    fseek($f, 0);
-
-    // Set headers to download file rather than displayed
-    header('Content-Type: application/vnd.ms-excel');
-    header('Content-Disposition: attachment; filename="' . $filename . '"');
-
-    // Output all remaining data on a file pointer
-    fpassthru($f);
+    // Output the PDF as a download
+    $filename = "signup-data_" . date('Y-m-d') . ".pdf";
+    $pdf->Output($filename, 'D');
 }
-
-
-
 ?>

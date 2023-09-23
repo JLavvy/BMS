@@ -90,34 +90,60 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   </header>
 
   <div class="wrapper" style="margin-top: 60px;">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-2 d-none d-md-block sidebar  bg-light" style="position:fixed;z-index:1000">
-        <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="studentdashboard.php"> <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Registration.php"><i class="fas fa-user-graduate"></i>Registration</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="application.php"><i class="fas fa-book"></i>Bursary Application</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="successful.php"><i class="fas fa-check"></i>Shortlisted Applicants</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="logout.php" onclick="<?php session_destroy(); ?>">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Logout</a>
-                        </li>
-                    </ul>
+  <div class="container-fluid">
+            <div class="row">
+            <div class="col-md-2 d-none d-md-block sidebar bg-light" style="position:fixed;z-index:1000">
+          <ul class="nav flex-column">
+            <br />
+            <div class="nav-item-container">
+              <li class="nav-item">
+                <a class="nav-link active" href="studentdashboard.php" style="color: #000;">
+                  <i class="fas fa-tachometer-alt"></i>Dashboard
+                </a>
+              </li>
+            </div>
+            <br />
+            <div class="nav-item-container">
+              <li class="nav-item">
+                <a class="nav-link active " href="Registration.php" style="color: #000;">
+                  <i class="fas fa-users"></i>Registration
+                </a>
+              </li>
+            </div>
+            <br />
+            <div class="nav-item-container">
+              <li class="nav-item">
+                <a class="nav-link" href="application.php" style="color: #000;">
+                  <i class="fas fa-book"></i>Bursary Application
+                </a>
+              </li>
+            </div>
+            <br />
+
+            <div class="nav-item-container">
+              <li class="nav-item">
+                <a class="nav-link" href="approved.php" style="color: #000;">
+                  <i class="fas fa-book"></i>Shortlisted Applicants
+                </a>
+              </li>
+            </div>
+            <br />
+           
+            <div class="nav-item-container">
+              <li class="nav-item">
+                <a class="nav-link" href="logout.php" style="color: #000;">
+                  <i class="fas fa-sign-out-alt"></i>Logout
+                </a>
+              </li>
+            </div>
+            <br />
+          </ul>
         </div>
 
         <div class="col-md-10 offset-md-2 content" style="overflow-y: auto;">
           <div class="container my-5">
             <div class="row justify-content-center">
-              <div class="col-md-9 col-lg-5">
+              <div class="col-md-19 col-lg-15">
                 <div class="card shadow-sm">
                   <div class="card-body">
                     <h1 class="card-title text-center mb-5">Student Registration</h1>

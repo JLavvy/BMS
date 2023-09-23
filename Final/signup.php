@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             } else {
                 $login_rank = 'student';
             }
-            $insert = "INSERT INTO loginn(Login_user_name, Login_Password, Login_rank) VALUES('$Login_user_name', '$Login_Password', '$login_rank')";
+            $insert = "INSERT INTO loginn(Login_user_name, Login_Password, Login_rank) VALUES('$Login_user_name', '$hashed', '$login_rank')";
             mysqli_query($con, $insert);
             header('location:login.php');
         }

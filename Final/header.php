@@ -42,7 +42,7 @@
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                         <div class="container">
-                            <a class="nav-link" href="login.php"><i class="fas fa-user"></i>Student Login</a>
+                            <a class="nav-link" href="login.php"><i class="fas fa-user"></i>Login</a>
                         </div>
                     </li>
 
@@ -52,11 +52,6 @@
                         </div>
                     </li>
 
-                    <li class="nav-item">
-                        <div class="container">
-                            <a class="nav-link" href="details.php"> <i class="fas fa-user-graduate"></i>How to Apply</a>
-                        </div>
-                    </li>
 
                 </ul>
             </div>

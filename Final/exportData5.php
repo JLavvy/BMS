@@ -2,35 +2,33 @@
 include('config.php');
 
 // Fetch records from database
-$query = "SELECT * FROM busary_applications ORDER BY Application_id ASC";
+$query = "SELECT * FROM shortlisted_applications ORDER BY Shortlisted_id ASC";
 $result = mysqli_query($con, $query);
 
 if (mysqli_num_rows($result) > 0) {
     $delimiter = ",";
-    $filename = "Applications-data_" . date('Y-m-d') . ".csv";
+    $filename = "Shortlisted-data_" . date('Y-m-d') . ".csv";
 
     // Create a file pointer
     $f = fopen('php://memory', 'w');
 
     // Set column headers
-    $fields = array( 'Student Name', 'Amount', 'Date', 'Semester');
+    $fields = array( 'Student Name', 'Amount', 'Date');
     fputcsv($f, $fields, $delimiter);
 
     // Output each row of the data, format line as csv and write to file pointer
     while ($row = mysqli_fetch_assoc($result)) {
-        $Application_Student_id = $row['Application_Student_id'];
-        $Student_sql = "SELECT Student_first_name, Student_Middle_name, Student_last_name FROM student WHERE Student_id ='$Application_Student_id'";
+        $Shortlisted_Application_id = $row['Shortlisted_Application_id'];
+        $Student_sql = "SELECT s.Student_first_name, s.Student_Middle_name, s.Student_last_name FROM student s JOIN busary_applications b ON s.Student_id = b.Application_Student_id WHERE b.Application_id = '$Shortlisted_Application_id'";
         $Student_result = mysqli_query($con, $Student_sql);
         $Student_row = mysqli_fetch_assoc($Student_result);
+        $first_name = $Student_row['Student_first_name'];
+        $middle_name = $Student_row['Student_Middle_name'];
+        $last_name = $Student_row['Student_last_name'];
         $student_name = $Student_row['Student_first_name'] . " " . $Student_row['Student_Middle_name'] . " " . $Student_row['Student_last_name'];
 
-        $Application_Busary_id = $row['Application_Busary_id'];
-        $busary_sql = "SELECT Busary_semester FROM busary WHERE Busary_id ='$Application_Busary_id'";
-        $busary_result = mysqli_query($con, $busary_sql);
-        $busary_row = mysqli_fetch_assoc($busary_result);
-        $Busary_semester = $busary_row['Busary_semester'];
 
-        $lineData = array( $student_name, $row['Application_amount'], $row['Application_date'], $Busary_semester);
+        $lineData = array( $student_name, $row['Shortlisted_Allocated_Amount'], $row['Shortlisted_Date']);
         fputcsv($f, $lineData, $delimiter);
     }
 

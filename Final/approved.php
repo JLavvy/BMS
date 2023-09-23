@@ -36,7 +36,7 @@ include('inactivity.php');
         </nav>
     </header>
     <div class="wrapper" style="margin-top: 60px;">
-    <div class="container-fluid">
+        <div class="container-fluid">
             <div class="row">
             <div class="col-md-2 d-none d-md-block sidebar bg-light" style="position:fixed;z-index:1000">
           <ul class="nav flex-column">
@@ -85,73 +85,59 @@ include('inactivity.php');
             <br />
           </ul>
         </div>
-
-
+        
         <div class="col-md-10 offset-md-2 content" style="overflow-y: auto;">
+        <table class="table table-borderless table-striped">
+                        <thead>
+                            <tr>
 
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="heading">
-                <div class="heading"><i class="fa fa-comments"></i> Notifications</div>
-                <div class="heading-body" style="font-weight:1000;color:red">
-                  <marquee onmouseover="this.stop()" onmouseout="this.start()" scrollamount=10">
-                    ALERT!! BURSARY APPLICATION FOR 2023 HAS NOT YET BEEN ACTIVATED.KINDLY BE PATIENT.THANK YOU
-                  </marquee>
+                                <th scope="col">Student</th>
+                                <th scope="col">Allocated Amount</th>
+                                <th scope="col">Allocation Date</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $select = "SELECT * FROM shortlisted_applications";
+                            $result = mysqli_query($con, $select);
+                            if ($result) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $Shortlisted_id = $row['Shortlisted_id'];
+                                    $Shortlisted_Application_id = $row['Shortlisted_Application_id'];
+                                    $Student_sql = "SELECT s.Student_first_name, s.Student_Middle_name, s.Student_last_name FROM student s JOIN busary_applications b ON s.Student_id = b.Application_Student_id WHERE b.Application_id = '$Shortlisted_Application_id'";
+                                    $Student_result = mysqli_query($con, $Student_sql);
+                                    $Student_row = mysqli_fetch_assoc($Student_result);
+                                    $first_name = $Student_row['Student_first_name'];
+                                    $middle_name = $Student_row['Student_Middle_name'];
+                                    $last_name = $Student_row['Student_last_name'];
 
 
+
+                                    $Shortlisted_amount = $row['Shortlisted_Allocated_Amount'];
+                                    $Shortlisted_date = $row['Shortlisted_Date'];
+
+
+                                    echo '
+                    <tr>
+                    <th scope="row">'. $first_name . ' ' . $middle_name . ' ' . $last_name . '</th>
+                    <td>' . $Shortlisted_amount  . '</td>
+                    <td>' . $Shortlisted_date  . '</td>
+                   
+                    
+                  </tr>';
+                                }
+                            }
+                            ?>
+
+
+                        </tbody>
+                    </table>
                 </div>
-
-              </div>
             </div>
-          </div>
-
-          <!-- Student Profile -->
-          <div class="student-profile py-4">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-10">
-                 
-                      <h3 class="mb-0"><i class="fas fa-file"></i>HOW TO APPLY FOR BUSARY IN EMBAKASI WEST CONSTITUENCY</h3>
-                    </div>
-                    <div>
-
-                    </div>
-
-                    <div class="card-body pt-0">
-                      <ul>
-                      <li>STEP 1: Start by signing up if you are a new user and then login into the system using your username and password</li>
-                      <br />
-                      <li>STEP 2: Complete registration by going to the registration module and fill in the form.Ensure to use your correct user name.</li>
-                      <br />
-                      <li>STEP 3: Lastly, after completing the registration process in STEP 2, go to the Bursary application module and apply for the bursary and ensure to indicate the semester you are currently in,i.e, Semster 1, Semester 2 or Semster 3.</li>
-                      <br />
-                      </ul>
-
-                      <div >
-                 
-                      <h3>NB:</h3>
-                      <p>KINDLY confirm that you have given the right information before submitting ony of your data.In case of any changes that you would like to make, kindly send an email to <a href = "mailto: lavogajanyce@gmail.com">lavogajanyce@gmail.com</a><a href:mailto</p>
-
-                    </div>
-
-                    </div>
-                  </div>
-                </div>
-              
-          </div>
-
         </div>
-        </div>
-      </div>
-
-      </main>
-
     </div>
-  </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

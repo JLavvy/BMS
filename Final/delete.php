@@ -12,6 +12,7 @@ if (isset($_GET['deleteid'])){
         die(mysqli_error($con));
     }
 }
+
 if (isset($_GET['deleteid'])){
     $Student_id=$_GET['deleteid'];
 
@@ -23,6 +24,7 @@ if (isset($_GET['deleteid'])){
         die(mysqli_error($con));
     }
 }
+
 if (isset($_GET['deleteid'])){
     $Application_id=$_GET['deleteid'];
 
@@ -34,6 +36,7 @@ if (isset($_GET['deleteid'])){
         die(mysqli_error($con));
     }
 }
+
 if (isset($_GET['deleteid'])){
     $University_id=$_GET['deleteid'];
 
@@ -41,6 +44,18 @@ if (isset($_GET['deleteid'])){
     $result = mysqli_query($con, $select);
     if ( $result ){
         header('location:versity.php'); 
+    }else{
+        die(mysqli_error($con));
+    }
+}
+
+if (isset($_GET['deleteid'])){
+    $Shortlisted_id=$_GET['deleteid'];
+
+    $select="DELETE FROM shortlisted_applications where Shortlisted_id=$Shortlisted_id";
+    $result = mysqli_query($con, $select);
+    if ( $result ){
+        header('location:shortlisted.php'); 
     }else{
         die(mysqli_error($con));
     }

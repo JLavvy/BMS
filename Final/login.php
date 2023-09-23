@@ -3,35 +3,37 @@ include ('config.php');
 include('header.php');
 session_start();
 
-
-if (isset($_REQUEST["submit"]))
+if (isset($_POST["submit"]))
 {
-  $Login_user_name=$_REQUEST["Login_user_name"];
-  $Login_Password=$_REQUEST["Login_Password"];
- 
+  $Login_user_name=$_POST["Login_user_name"];
+  $Login_Password=$_POST["Login_Password"];
 
-  $query="SELECT * FROM loginn WHERE Login_user_name='$Login_user_name' AND Login_Password='$Login_Password'";
+  $query="SELECT * FROM loginn WHERE Login_user_name='$Login_user_name'";
   $result = mysqli_query($con, $query);
-  $rowcount=mysqli_num_rows($result);
-  if ($rowcount==true)
-
-  {
-   
-    $_SESSION['Login_id'] = $row['Login_id'];
-
-    // Redirect to dashboard.php if username is admin1 or admin2
-    if ($Login_user_name == "admin1" || $Login_user_name == "admin2") {
-      header('Location: admindashboard.php');
+  
+  if (mysqli_num_rows($result) == 1) {
+    $row = mysqli_fetch_assoc($result);
+    if (password_verify($Login_Password, $row['Login_Password'])) {
+      // Password is correct, set session variable and redirect to dashboard
+      $_SESSION['uuid'] = $row['Login_id'];
+      $_SESSION['Login_user_name'] = $Login_user_name;
+      if ($Login_user_name == "admin1" || $Login_user_name == "admin2") {
+        setcookie('user_type', 'admin', time()+86400, '/');
+        header('Location: admindashboard.php');
+      } else {
+        setcookie('user_type', 'student', time()+86400, '/');
+        header('Location: studentdashboard.php');
+      }
     } else {
-      // Redirect to another page if username is not admin1 or admin2
-      header('Location: studentdashboard.php');
+      // Password is incorrect, show error message
+      echo "Incorrect password!";
     }
+  } else {
+    // User doesn't exist, show error message
+    echo "User doesn't exist!";
   }
 }
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

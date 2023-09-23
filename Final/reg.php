@@ -20,48 +20,82 @@ include "config.php";
 </head>
 
 <body>
-  <header id="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <div class="logo">
-        <img src="Images/image1.png" width="60" />
-      </div>
-      <a class="navbar-brand" href="#">BURSARY MANAGEMENT SYSTEM</a>
+  
+<header id="header" style="border-bottom: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="logo">
+                <img src="Images/image1.png" width="60" />
+            </div>
+            <a class="navbar-brand" href="#">BURSARY MANAGEMENT SYSTEM</a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php" style="color: #000;" onclick="<?php session_destroy(); ?>">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                    </a>
+                </li>
+            </ul>
 
+        </nav>
+    </header>
 
-    </nav>
-  </header>
 
   <div class="wrapper" style="margin-top: 60px;">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2 d-none d-md-block sidebar  bg-light" style="position:fixed;z-index:1000">
-        <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="admindashboard.php" style="color: #000;"> <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="reg.php" style="color: #000;"> <i class="fas fa-users"></i>Students</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="versity.php" style="color: #000;"><i class="fas fa-building"></i>Universities</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="applicants.php" style="color: #000;"><i class="fas fa-users"></i>Total Applicants</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="" style="color: #000;"><i class="fas fa-users"></i>Shortlisted Applicants</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="profile.php" style="color: #000;"><i class="fas fa-user"></i>Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="logout.php" style="color: #000;" onclick="<?php session_destroy(); ?>">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Logout</a>
-                        </li>
+      <div class="col-md-2 d-none d-md-block sidebar bg-light" style="position:fixed;z-index:1000">
+                    <ul class="nav flex-column">
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="admindashboard.php" style="color: #000;">
+                                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link active " href="reg.php" style="color: #000;">
+                                    <i class="fas fa-users"></i>Students
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link" href="versity.php" style="color: #000;">
+                                    <i class="fas fa-building"></i>Universities
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link" href="applicants.php" style="color: #000;">
+                                    <i class="fas fa-users"></i>Total Applicants
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link" href="successful.php" style="color: #000;">
+                                    <i class="fas fa-users"></i>Approve/ Reject
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link" href="shortlisted.php" style="color: #000;">
+                                    <i class="fas fa-users"></i>Shortlisted Applicants
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        
                     </ul>
-        </div>
+                </div>
 
         <div class="col-md-10 offset-md-2 content" style="overflow-y: auto;">
 
@@ -75,7 +109,7 @@ include "config.php";
           <table class="table table-borderless table-striped">
             <thead>
               <tr>
-                <th scope="col">Student ID</th>
+                
                 <th scope="col">First Name</th>
                 <th scope="col">Middle Name</th>
                 <th scope="col">Last Name</th>
@@ -119,8 +153,8 @@ include "config.php";
 
                   echo '
                         <tr>
-                            <th scope="row">' . $Student_id . '</th>
-                            <td>' . $Student_first_name . '</td>
+                            <th scope="row">' . $Student_first_name .  '</th>
+                            
                             <td>' . $Student_Middle_name . '</td>
                             <td>' . $Student_last_name . '</td>
                             <td>' . $Student_email_address . '</td>
@@ -133,7 +167,7 @@ include "config.php";
 
                             <td>
                             <button class="btn btn-primary" style="margin-bottom: 10px;">
-                              <a href="update.php?updateid=' . $Student_id . '" class ="text-light">Update</a>
+                              <a href="update2.php?updateid=' . $Student_id . '" class ="text-light">Update</a>
                             </button> 
                             <br />
                           

@@ -1,14 +1,13 @@
 <?php
-include ('config.php');
-include ('session.php');
-
+include('config.php');
+include('session.php');
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Bursary Management System</title>
+    <title>Registration Form</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -93,37 +92,34 @@ include ('session.php');
                             </li>
                         </div>
                         <br />
-                        
+                       
                     </ul>
                 </div>
                 <div class="col-md-10 offset-md-2 content" style="overflow-y: auto;">
-                    
+                   
 
                     <div class="float-right">
-            <a href="exportData4.php" class="btn btn-success"><i class="dwn"></i> Export</a>
-          </div>
+                        <a href="exportData5.php" class="btn btn-success"><i class="dwn"></i> Export</a>
+                    </div>
                     <table class="table table-borderless table-striped">
                         <thead>
                             <tr>
-                               
+
                                 <th scope="col">Student</th>
-                                <th scope="col">Application Amount</th>
-                                <th scope="col">Application Date</th>
-                                <th scope="col">Semester</th>
-                                <th scope="col">Operations</th>
+                                <th scope="col">Allocated Amount</th>
+                                <th scope="col">Allocation Date</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $select = "SELECT * FROM busary_applications";
+                            $select = "SELECT * FROM shortlisted_applications";
                             $result = mysqli_query($con, $select);
                             if ($result) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    $Application_id = $row['Application_id'];
-
-                                    $Application_Student_id = $row['Application_Student_id'];
-                                    $Student_sql = "SELECT Student_first_name,Student_Middle_name,Student_last_name FROM student WHERE Student_id ='$Application_Student_id'";
+                                    $Shortlisted_id = $row['Shortlisted_id'];
+                                    $Shortlisted_Application_id = $row['Shortlisted_Application_id'];
+                                    $Student_sql = "SELECT s.Student_first_name, s.Student_Middle_name, s.Student_last_name FROM student s JOIN busary_applications b ON s.Student_id = b.Application_Student_id WHERE b.Application_id = '$Shortlisted_Application_id'";
                                     $Student_result = mysqli_query($con, $Student_sql);
                                     $Student_row = mysqli_fetch_assoc($Student_result);
                                     $first_name = $Student_row['Student_first_name'];
@@ -131,42 +127,21 @@ include ('session.php');
                                     $last_name = $Student_row['Student_last_name'];
 
 
-                                    $Application_amount = $row['Application_amount'];
-                                    $Application_date = $row['Application_date'];
 
-                                    $Application_Busary_id = $row['Application_Busary_id'];
-                                    $busary_sql = "SELECT Busary_semester FROM busary WHERE Busary_id ='$Application_Busary_id'";
-                                    $busary_result = mysqli_query($con, $busary_sql);
-                                    $busary_row = mysqli_fetch_assoc($busary_result);
-                                    $Busary_semester = $busary_row['Busary_semester'];
-
-
-
+                                    $Shortlisted_amount = $row['Shortlisted_Allocated_Amount'];
+                                    $Shortlisted_date = $row['Shortlisted_Date'];
 
 
                                     echo '
                     <tr>
-                    <th scope="row">' . $first_name . ' ' . $middle_name . ' ' . $last_name . '</th>
-                    <td>' . $Application_amount  . '</td>
-                    <td>' . $Application_date  . '</td>
-                    <td>' . $Busary_semester  . '</td>
-
-                  
-                    
-
-                    <td>
-                    <button class="btn btn-success" style="margin-bottom: 10px;">
-                    <a href="approve.php ? approveid=' . $Application_id . '" class ="text-light">
-                        Approve
-                    </a></button>
-                    <br />
-
-                    <button class="btn btn-danger" >
-                    <a href="reject.php ? rejectid=' . $Application_id . '" class ="text-light">
-                        Reject
-                    </a></button>
-
-                </td>
+                    <th scope="row">'. $first_name . ' ' . $middle_name . ' ' . $last_name . '</th>
+                    <td>' . $Shortlisted_amount  . '</td>
+                    <td>' . $Shortlisted_date  . '</td>
+                   <td>
+                   <button class="btn btn-danger">
+                              <a href="delete.php?deleteid=' . $Shortlisted_id . '" class ="text-light">Delete</a>
+                            </button>
+                   </td>
                     
                   </tr>';
                                 }

@@ -1,37 +1,30 @@
 <?php
 include ('config.php');
+include ('session.php');
 
-session_start();
-
-
-if (isset($_REQUEST["submit"]))
+if (isset($_POST["submit"]))
 {
   $Login_id=$_GET['updateid'];
-  $Login_user_name=$_REQUEST["Login_user_name"];
-  $Login_Password=$_REQUEST["Login_Password"];
+  $Login_user_name=$_POST["Login_user_name"];
  
-
-  $query="update 'loginn' set Login_id=$Login_id,Login_user_name='$Login_user_name', Login_Password='$Login_Password' where Login_id=$Login_id";
+  $query="UPDATE loginn SET Login_user_name='$Login_user_name' WHERE Login_id=$Login_id";
   $result = mysqli_query($con, $query);
-  $rowcount=mysqli_num_rows($result);
-  if ($rowcount==true)
 
+  if ($result)
   {
-   
-    $_SESSION['Login_id'] = $row['Login_id'];
-
     // Redirect to dashboard.php if username is admin1 or admin2
     if ($Login_user_name == "admin1" || $Login_user_name == "admin2") {
       header('Location: admindashboard.php');
     } else {
       // Redirect to another page if username is not admin1 or admin2
-      header('Location: studentdashboard.php');
+      header('Location: admindashboard.php');
     }
+  } else {
+    echo "Error: " . mysqli_error($con);
   }
 }
-
-
 ?>
+
 
 
 <!DOCTYPE html>
@@ -66,15 +59,7 @@ if (isset($_REQUEST["submit"]))
                   <input type="text" class="form-control" id="name" name="Login_user_name" placeholder="Enter Username" required>
                 </div>
               </div>
-
-              <div class="mb-3">
-                <label for="Login_Password" class="form-label">Password</label>
-                <div class="input-group">
-                  <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                  <input type="Password" class="form-control" id="Login_Password" name="Login_Password" placeholder="Password" required>
-                </div>
-              </div>
-
+              
               
               <button type="submit" name="submit" class="btn btn-primary w-100 mb-3 onclick="window.location.href = 'admindashboard.php'">
               <i class="fas fa-sign-in-alt me-2"></i> Update

@@ -20,45 +20,79 @@ require_once('config.php');
 </head>
 
 <body>
-    <header id="header">
+   
+<header id="header" style="border-bottom: 2px solid #ccc; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="logo">
                 <img src="Images/image1.png" width="60" />
             </div>
             <a class="navbar-brand" href="#">BURSARY MANAGEMENT SYSTEM</a>
-
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php" style="color: #000;" onclick="<?php session_destroy(); ?>">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                    </a>
+                </li>
+            </ul>
 
         </nav>
     </header>
+
     <div class="wrapper" style="margin-top: 60px;">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-2 d-none d-md-block sidebar  bg-light" style="position:fixed;z-index:1000">
-                <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="admindashboard.php" style="color: #000;"> <i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="reg.php" style="color: #000;"> <i class="fas fa-users"></i>Students</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="versity.php" style="color: #000;"><i class="fas fa-building"></i>Universities</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="applicants.php" style="color: #000;"><i class="fas fa-users"></i>Total Applicants</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="" style="color: #000;"><i class="fas fa-users"></i>Shortlisted Applicants</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="profile.php" style="color: #000;"><i class="fas fa-user"></i>Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="logout.php" style="color: #000;" onclick="<?php session_destroy(); ?>">
-                                <i class="fas fa-sign-out-alt"></i>
-                                Logout</a>
-                        </li>
+            <div class="col-md-2 d-none d-md-block sidebar bg-light" style="position:fixed;z-index:1000">
+                    <ul class="nav flex-column">
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="admindashboard.php" style="color: #000;">
+                                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link active " href="reg.php" style="color: #000;">
+                                    <i class="fas fa-users"></i>Students
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link" href="versity.php" style="color: #000;">
+                                    <i class="fas fa-building"></i>Universities
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link" href="applicants.php" style="color: #000;">
+                                    <i class="fas fa-users"></i>Total Applicants
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link" href="successful.php" style="color: #000;">
+                                    <i class="fas fa-users"></i>Approve/ Reject
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        <div class="nav-item-container">
+                            <li class="nav-item">
+                                <a class="nav-link" href="shortlisted.php" style="color: #000;">
+                                    <i class="fas fa-users"></i>Shortlisted Applicants
+                                </a>
+                            </li>
+                        </div>
+                        <br />
+                        
                     </ul>
                 </div>
                 <div class="col-md-10 offset-md-2 content" style="overflow-y: auto;">
@@ -70,7 +104,7 @@ require_once('config.php');
                     <table class="table table-borderless table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">University ID</th>
+                                
                                 <th scope="col">University Name</th>
                                 <th scope="col">University Email</th>
                                 <th scope="col">Phone </th>
@@ -97,8 +131,7 @@ require_once('config.php');
 
                                     echo '
                     <tr>
-                    <th scope="row">' . $University_id . '</th>
-                    <td>' .  $University_name  . '</td>
+                    <th scope="row">' . $University_name . '</th>
                     <td>' . $University_Email  . '</td>
                     <td>' . $University_phone_number . '</td>
                     <td>' . $University_code . '</td>
@@ -107,11 +140,11 @@ require_once('config.php');
                     
 
                     <td>
-                    <button class="btn btn-primary" ><a href="update.php ? updateid=' . $University_id . '" class ="text-light">
+                    <button class="btn btn-primary" ><a href="update3.php?updateid='.$University_id.'" class ="text-light">
                         Update
                     </a></button>
 
-                    <button class="btn btn-danger" ><a href="delete.php ? deleteid=' . $University_id . '" class ="text-light">
+                    <button class="btn btn-danger" ><a href="delete.php?deleteid='.$University_id.'" class ="text-light">
                         Delete
                     </a></button>
 
